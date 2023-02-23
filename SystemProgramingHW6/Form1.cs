@@ -7,11 +7,14 @@ public partial class Form1 : Form
     int countThread = 0;
     List<Thread> Threads= new List<Thread>();
 
-    Semaphore semaphore = new Semaphore(5, 5, "SEMAPHORE");
+    Semaphore semaphore = new Semaphore(4, 4, "SEMAPHORE");
 
     public Form1()
     {
         InitializeComponent();
+
+        domainUpDown1.Items.Capacity = int.MaxValue;
+        domainUpDown1.Text = "1";
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -42,7 +45,7 @@ public partial class Form1 : Form
         string? name = Thread.CurrentThread.Name;
         while (!isFinish)
         {
-            if (semaphore.WaitOne(1000))
+            if (semaphore.WaitOne(2000))
             {
                 try
                 {
@@ -68,20 +71,14 @@ public partial class Form1 : Form
 
         listBoxWaitingThreads.Items.Add(listBoxCreateThreads.SelectedItem);
 
-
-    }
-
-    private void listBoxWaitingThreads_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (listBoxCreateThreads.SelectedItem is null)
-            return;
-
         foreach (var item in Threads)
         {
             if (item.Name == listBoxCreateThreads.SelectedItem)
             {
+                listBoxCreateThreads.Items.Remove(listBoxCreateThreads.SelectedItem);
                 item.Start(semaphore);
             }
         }
+
     }
 }

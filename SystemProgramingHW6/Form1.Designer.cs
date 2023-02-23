@@ -72,7 +72,7 @@
             this.domainUpDown1.Name = "domainUpDown1";
             this.domainUpDown1.Size = new System.Drawing.Size(187, 27);
             this.domainUpDown1.TabIndex = 1;
-            this.domainUpDown1.Text = "5";
+            this.domainUpDown1.Text = "4";
             // 
             // button1
             // 
