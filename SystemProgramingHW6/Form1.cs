@@ -5,7 +5,7 @@ namespace SystemProgramingHW6;
 public partial class Form1 : Form
 {
     int countThread = 0;
-    List<Thread> Threads= new List<Thread>();
+    List<Thread> Threads = new List<Thread>();
 
     Semaphore semaphore = new Semaphore(4, 4, "SEMAPHORE");
 
@@ -13,8 +13,10 @@ public partial class Form1 : Form
     {
         InitializeComponent();
 
-        domainUpDown1.Items.Capacity = int.MaxValue;
-        domainUpDown1.Text = "1";
+        for (int i = 0; i < 100; i++)
+        {
+            domainUpDown1.Items.Add(i);
+        }
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -25,6 +27,8 @@ public partial class Form1 : Form
         Threads.Add(thread);
 
         thread.Name = $"Thread {++countThread}";
+
+
 
 
         listBoxCreateThreads.Items.Add(thread.Name);
@@ -79,6 +83,11 @@ public partial class Form1 : Form
                 item.Start(semaphore);
             }
         }
+
+    }
+
+    private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
+    {
 
     }
 }
